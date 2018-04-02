@@ -128,11 +128,12 @@ On<Android>().SetOffscreenPageLimit(2)
 
 ![](android-images/tabbedpage-swipe.png)
 
-<a name="elevation" />
+<a name="elevation"></a>
 
 ## Controlling the Elevation of Visual Elements
 
-This platform-specific is used to control the elevation, or Z-order, of visual elements on applications that target API 21 or greater. The elevation of a visual element determines its drawing order, with visual elements with higher Z values occluding visual elements with lower Z values. It's consumed in XAML by setting the `Elevation.Elevation` attached property to a `boolean` value:
+このplatform-specificは、ターゲットがAPI21以上のアプリケーションでvisual elementsのz-order（重なりの順番）やelevation（高度）を制御するために使われます。visual elementのelevationは、高いZの値を持つvisual elementsが低いZの値をもつvisual elementsを塞ぐように、自身の描画順を決定します。これはXamlで`Elevation.Elevation`添付プロパティに`boolean`値を設定して使用します。
+
 
 ```xaml
 <ContentPage ...
@@ -151,7 +152,7 @@ This platform-specific is used to control the elevation, or Z-order, of visual e
 </ContentPage>
 ```
 
-Alternatively, it can be consumed from C# using the fluent API:
+あるいはC#からfluent APIを使って使用することができます。
 
 ```csharp
 using Xamarin.Forms.PlatformConfiguration;
@@ -193,9 +194,9 @@ public class AndroidElevationPageCS : ContentPage
 }
 ```
 
-The `Button.On<Android>` method specifies that this platform-specific will only run on Android. The `Elevation.SetElevation` method, in the [`Xamarin.Forms.PlatformConfiguration.AndroidSpecific`](https://developer.xamarin.com/api/namespace/Xamarin.Forms.PlatformConfiguration.AndroidSpecific/) namespace, is used to set the elevation of the visual element to a nullable `float`. In addition, the `Elevation.GetElevation` method can be used to retrieve the elevation value of a visual element.
+`Button.On<Android>`メソッドは、このplatform-specificがAndroid上でのみ動作することを指定します。`Elevation.SetElevation`メソッドは、[`Xamarin.Forms.PlatformConfiguration.AndroidSpecific`](https://developer.xamarin.com/api/namespace/Xamarin.Forms.PlatformConfiguration.AndroidSpecific/)名前空間に存在し、visual elementのelevationにnull許容型の`float`値を設定するために使われます。さらに、`Elevation.GetElevation`メソッドは、visual elementのelevation値を取得するために使用できます。
 
-The result is that the elevation of visual elements can be controlled so that visual elements with higher Z values occlude visual elements with lower Z values. Therefore, in this example the second [`Button`](https://developer.xamarin.com/api/type/Xamarin.Forms.Button/) is rendered above the [`BoxView`](https://developer.xamarin.com/api/type/Xamarin.Forms.BoxView/) because it has a higher elevation value:
+その結果、visual elementsのelevationは、高いZ値のvisual elementsが低いZ値のvisual elementsを塞ぐように制御されます。それによって、この例では2番目の[`Button`](https://developer.xamarin.com/api/type/Xamarin.Forms.Button/)は、より高いelevation値を持つため、[`BoxView`](https://developer.xamarin.com/api/type/Xamarin.Forms.BoxView/)の上に描画されます。
 
 ![](android-images/elevation.png)
 
