@@ -16,15 +16,15 @@ _Platform-specificsはCustom RenderersやEffectsを実装することなく、�
 
 Androidでは、Xamarin.Formsは以下のようなplatform-specificがあります。
 
-- ソフトキーボードの操作モードの設定。詳細は[Setting the Soft Keyboard Input Mode](#soft_input_mode)を参照。
-- [`ListView`](https://developer.xamarin.com/api/type/Xamarin.Forms.ListView/)でのfast scrollingの有効化。詳細は[Enabling Fast Scrolling in a ListView](#fastscroll)を参照。
-- [`TabbedPage`](https://developer.xamarin.com/api/type/Xamarin.Forms.TabbedPage/)でのページ間のスワイプ操作の有効化。詳細は[Enabling Swiping Between Pages in a TabbedPage](#enable_swipe_paging)を参照。
-- 描画の順番を決定するためのVisualElementsのZ-orderの制御。詳細は[Controlling the Elevation of Visual Elements](#elevation)を参照。
-- AppCompatを使ったアプリケーションで、pauseやresumeで[`Disappearing`](https://developer.xamarin.com/api/event/Xamarin.Forms.Page.Appearing/)や[`Appearing`](https://developer.xamarin.com/api/event/Xamarin.Forms.Page.Appearing/) といったpageのライフサイクルのイベントをそれぞれ無効化する。詳細は[Disabling the Disappearing and Appearing Page Lifecycle Events](#disable_lifecycle_events)を参照。
+- ソフトキーボードの操作モードの設定。詳細は[ソフトキーボードの操作モードの設定](#soft_input_mode)を参照。
+- [`ListView`](https://developer.xamarin.com/api/type/Xamarin.Forms.ListView/)でのfast scrollingの有効化。詳細は[ListViewでのfast scrollingの有効化](#fastscroll)を参照。
+- [`TabbedPage`](https://developer.xamarin.com/api/type/Xamarin.Forms.TabbedPage/)でのページ間のスワイプ操作の有効化。詳細は[TabbedPageでのページ間のスワイプ操作の有効化](#enable_swipe_paging)を参照。
+- 描画の順番を決定するためのVisualElementsのZ-orderの制御。詳細は[Visual ElementsのElevationの制御](#elevation)を参照。
+- AppCompatを使ったアプリケーションで、pauseやresumeで[`Disappearing`](https://developer.xamarin.com/api/event/Xamarin.Forms.Page.Appearing/)や[`Appearing`](https://developer.xamarin.com/api/event/Xamarin.Forms.Page.Appearing/) といったpageのライフサイクルのイベントをそれぞれ無効化する。詳細は[DisappearingとAppearingのぺージライフサイクルイベントの無効化](#disable_lifecycle_events)を参照。
 
 <a name="soft_input_mode"></a>
 
-## Setting the Soft Keyboard Input Mode
+## ソフトキーボードの操作モードの設定
 
 このplatform-specificはソフトキーボードの入力エリアのための操作方式を設定するために使われ、Xamlで[`Application.WindowSoftInputModeAdjust`](https://developer.xamarin.com/api/field/Xamarin.Forms.PlatformConfiguration.AndroidSpecific.Application.WindowSoftInputModeAdjustProperty/)添付プロパティに[`WindowSoftInputModeAdjust`](https://developer.xamarin.com/api/type/Xamarin.Forms.PlatformConfiguration.AndroidSpecific.WindowSoftInputModeAdjust/)列挙型の値を設定して使用します。
 
@@ -54,7 +54,7 @@ App.Current.On<Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust
 
 <a name="fastscroll"></a>
 
-## Enabling Fast Scrolling in a ListView
+## ListViewでのfast scrollingの有効化
 
 このplatform-specificは[`ListView`](https://developer.xamarin.com/api/type/Xamarin.Forms.ListView/)のデータを通過する高速なスクロールを有効にするために使われます。これはXamlで`ListView.IsFastScrollEnabled`添付プロパティに`boolean`値を設定することで使用します。
 
@@ -98,7 +98,7 @@ listView.On<Android>().SetIsFastScrollEnabled(!listView.On<Android>().IsFastScro
 
 <a name="enable_swipe_paging"></a>
 
-## Enabling Swiping Between Pages in a TabbedPage
+## TabbedPageでのページ間のスワイプ操作の有効化
 
 このplatform-specificは[`TabbedPage`](https://developer.xamarin.com/api/type/Xamarin.Forms.TabbedPage/)のぺージ間の水平ジェスチャーによるスワイプ移動を有効にするために使われます。これはXamlで[`TabbedPage.IsSwipePagingEnabled`](https://developer.xamarin.com/api/field/Xamarin.Forms.PlatformConfiguration.AndroidSpecific.TabbedPage.IsSwipePagingEnabledProperty/)添付プロパティに`boolean` 値を設定することで使用します。
 
@@ -130,7 +130,7 @@ On<Android>().SetOffscreenPageLimit(2)
 
 <a name="elevation"></a>
 
-## Controlling the Elevation of Visual Elements
+## Visual ElementsのElevationの制御
 
 このplatform-specificは、ターゲットがAPI21以上のアプリケーションでvisual elementsのz-order（重なりの順番）やelevation（高度）を制御するために使われます。visual elementのelevationは、高いZの値を持つvisual elementsが低いZの値をもつvisual elementsを塞ぐように、自身の描画順を決定します。これはXamlで`Elevation.Elevation`添付プロパティに`boolean`値を設定して使用します。
 
@@ -200,16 +200,17 @@ public class AndroidElevationPageCS : ContentPage
 
 ![](android-images/elevation.png)
 
-<a name="disable_lifecycle_events" />
+<a name="disable_lifecycle_events"></a>
 
-## Disabling the Disappearing and Appearing Page Lifecycle Events
+## DisappearingとAppearingのぺージライフサイクルイベントの無効化
 
-This platform-specific is used to disable the [`Disappearing`](https://developer.xamarin.com/api/event/Xamarin.Forms.Page.Appearing/) and [`Appearing`](https://developer.xamarin.com/api/event/Xamarin.Forms.Page.Appearing/) page events on application pause and resume respectively, for applications that use AppCompat. In addition, it includes the ability to control whether the soft keyboard is displayed on resume, if it was displayed on pause, provided that the operating mode of the soft keyboard is set to [`WindowSoftInputModeAdjust.Resize`](https://developer.xamarin.com/api/field/Xamarin.Forms.PlatformConfiguration.AndroidSpecific.WindowSoftInputModeAdjust.Resize/).
+このplatform-specificは、AppCompatを使ったアプリケーションで、アプリケーションのpauseとresumeの[`Disappearing`](https://developer.xamarin.com/api/event/Xamarin.Forms.Page.Appearing/)と[`Appearing`](https://developer.xamarin.com/api/event/Xamarin.Forms.Page.Appearing/)のPageイベントをそれぞれ無効にするために使用されます。さらに、これにはpause時にソフトキーボードの操作方式に[`WindowSoftInputModeAdjust.Resize`](https://developer.xamarin.com/api/field/Xamarin.Forms.PlatformConfiguration.AndroidSpecific.WindowSoftInputModeAdjust.Resize/)が設定されていて、ソフトキーボードが表示されていた場合に、resume時にソフトキーボードを表示するかどうかを制御する機能も含まれます。
 
-> [!NOTE]
-> Note that these events are enabled by default to preserve existing behavior for applications that rely on the events. Disabling these events makes the AppCompat event cycle match the pre-AppCompat event cycle.
+> [!注意]
+> これらのイベントは、そのイベントに依存するアプリケーションの既存の動作を保持するためにデフォルトで有効であることに注意してください。これらのイベントを無効にするとAppCompatのイベントサイクルを以前のAppCompatのイベントサイクルに合わせます。
 
-This platform-specific can be consumed in XAML by setting the [`Application.SendDisappearingEventOnPause`](https://developer.xamarin.com/api/field/Xamarin.Forms.PlatformConfiguration.AndroidSpecific.AppCompat.Application.SendDisappearingEventOnPauseProperty/), [`Application.SendAppearingEventOnResume`](https://developer.xamarin.com/api/field/Xamarin.Forms.PlatformConfiguration.AndroidSpecific.AppCompat.Application.SendAppearingEventOnResumeProperty/), and [`Application.ShouldPreserveKeyboardOnResume`](https://developer.xamarin.com/api/field/Xamarin.Forms.PlatformConfiguration.AndroidSpecific.AppCompat.Application.ShouldPreserveKeyboardOnResumeProperty/) attached properties to `boolean` values:
+このplatform-specificはXamlで[`Application.SendDisappearingEventOnPause`](https://developer.xamarin.com/api/field/Xamarin.Forms.PlatformConfiguration.AndroidSpecific.AppCompat.Application.SendDisappearingEventOnPauseProperty/)・[`Application.SendAppearingEventOnResume`](https://developer.xamarin.com/api/field/Xamarin.Forms.PlatformConfiguration.AndroidSpecific.AppCompat.Application.SendAppearingEventOnResumeProperty/)・[`Application.ShouldPreserveKeyboardOnResume`](https://developer.xamarin.com/api/field/Xamarin.Forms.PlatformConfiguration.AndroidSpecific.AppCompat.Application.ShouldPreserveKeyboardOnResumeProperty/)添付プロパティに`boolean`値を設定して使用します。
+
 
 ```xaml
 <Application ...
@@ -222,7 +223,7 @@ This platform-specific can be consumed in XAML by setting the [`Application.Send
 </Application>
 ```
 
-Alternatively, it can be consumed from C# using the fluent API:
+あるいは、C#からfluent APIを使って使用することもできます。
 
 ```csharp
 using Xamarin.Forms.PlatformConfiguration;
@@ -237,18 +238,17 @@ Xamarin.Forms.Application.Current.On<Android>()
      .ShouldPreserveKeyboardOnResume(true);
 ```
 
-The `Application.Current.On<Android>` method specifies that this platform-specific will only run on Android. The [`Application.SendDisappearingEventOnPause`](https://developer.xamarin.com/api/member/Xamarin.Forms.PlatformConfiguration.AndroidSpecific.AppCompat.Application.SendDisappearingEventOnPause/p/Xamarin.Forms.IPlatformElementConfiguration{Xamarin.Forms.PlatformConfiguration.Android,Xamarin.Forms.Application}/System.Boolean/) method, in the [`Xamarin.Forms.PlatformConfiguration.AndroidSpecific.AppCompat`](https://developer.xamarin.com/api/namespace/Xamarin.Forms.PlatformConfiguration.AndroidSpecific.AppCompat/) namespace, is used to enable or disable firing the [`Disappearing`](https://developer.xamarin.com/api/event/Xamarin.Forms.Page.Appearing/) page event, when the application enters the background. The [`Application.SendAppearingEventOnResume`](https://developer.xamarin.com/api/member/Xamarin.Forms.PlatformConfiguration.AndroidSpecific.AppCompat.Application.SendAppearingEventOnResume/p/Xamarin.Forms.IPlatformElementConfiguration{Xamarin.Forms.PlatformConfiguration.Android,Xamarin.Forms.Application}/System.Boolean/) method is used to enable or disable firing the [`Appearing`](https://developer.xamarin.com/api/event/Xamarin.Forms.Page.Appearing/) page event, when the application resumes from the background. The [`Application.ShouldPreserveKeyboardOnResume`](https://developer.xamarin.com/api/member/Xamarin.Forms.PlatformConfiguration.AndroidSpecific.AppCompat.Application.ShouldPreserveKeyboardOnResume/p/Xamarin.Forms.IPlatformElementConfiguration{Xamarin.Forms.PlatformConfiguration.Android,Xamarin.Forms.Application}/System.Boolean/) method is used control whether the soft keyboard is displayed on resume, if it was displayed on pause, provided that the operating mode of the soft keyboard is set to [`WindowSoftInputModeAdjust.Resize`](https://developer.xamarin.com/api/field/Xamarin.Forms.PlatformConfiguration.AndroidSpecific.WindowSoftInputModeAdjust.Resize/).
+`Application.Current.On<Android>`メソッドはこのplatform-specificがAndroid上でのみ動作することを指定します。[`Application.SendDisappearingEventOnPause`](https://developer.xamarin.com/api/member/Xamarin.Forms.PlatformConfiguration.AndroidSpecific.AppCompat.Application.SendDisappearingEventOnPause/p/Xamarin.Forms.IPlatformElementConfiguration{Xamarin.Forms.PlatformConfiguration.Android,Xamarin.Forms.Application}/System.Boolean/)メソッドは、[`Xamarin.Forms.PlatformConfiguration.AndroidSpecific.AppCompat`](https://developer.xamarin.com/api/namespace/Xamarin.Forms.PlatformConfiguration.AndroidSpecific.AppCompat/)名前空間に存在し、アプリケーションがバックグラウンドに切り替わった時に[`Disappearing`](https://developer.xamarin.com/api/event/Xamarin.Forms.Page.Appearing/)ぺージイベントの発生を有効化または無効化するために使用されます。[`Application.SendAppearingEventOnResume`](https://developer.xamarin.com/api/member/Xamarin.Forms.PlatformConfiguration.AndroidSpecific.AppCompat.Application.SendAppearingEventOnResume/p/Xamarin.Forms.IPlatformElementConfiguration{Xamarin.Forms.PlatformConfiguration.Android,Xamarin.Forms.Application}/System.Boolean/)メソッドは、アプリケーションがバックグラウンドから復帰した時に[`Appearing`](https://developer.xamarin.com/api/event/Xamarin.Forms.Page.Appearing/)ページイベントの発生を有効化または無効化するために使用されます。[`Application.ShouldPreserveKeyboardOnResume`](https://developer.xamarin.com/api/member/Xamarin.Forms.PlatformConfiguration.AndroidSpecific.AppCompat.Application.ShouldPreserveKeyboardOnResume/p/Xamarin.Forms.IPlatformElementConfiguration{Xamarin.Forms.PlatformConfiguration.Android,Xamarin.Forms.Application}/System.Boolean/)メソッドは、pause時にソフトキーボードの操作方式に[`WindowSoftInputModeAdjust.Resize`](https://developer.xamarin.com/api/field/Xamarin.Forms.PlatformConfiguration.AndroidSpecific.WindowSoftInputModeAdjust.Resize/)が設定されていて、それが表示されている場合に、resume時にそれを表示するかどうかを制御するために使用されます。
 
-The result is that the [`Disappearing`](https://developer.xamarin.com/api/event/Xamarin.Forms.Page.Appearing/) and [`Appearing`](https://developer.xamarin.com/api/event/Xamarin.Forms.Page.Appearing/) page events won't be fired on application pause and resume respectively, and that if the soft keyboard was displayed when the application was paused, it will also be displayed when the application resumes:
+その結果、[`Disappearing`](https://developer.xamarin.com/api/event/Xamarin.Forms.Page.Appearing/)と[`Appearing`](https://developer.xamarin.com/api/event/Xamarin.Forms.Page.Appearing/)ぺージイベントはアプリケーションのpauseとresumeではそれぞれ発生しなくなり、pause時にソフトキーボードが表示されていた場合、resume時にもそれが表示されるようになります。
 
 [![](android-images/keyboard-on-resume.png "Lifecycle Events Platform-Specific")](android-images/keyboard-on-resume-large.png#lightbox "Lifecycle Events Platform-Specific")
 
-## Summary
+## まとめ
 
-This article demonstrated how to consume the Android platform-specifics that are built into Xamarin.Forms. Platform-specifics allow you to consume functionality that's only available on a specific platform, without implementing custom renderers or effects.
+この記事ではXamarin.Forms組み込みのAndroidのplatform-specificsの使い方を説明しました。Platform-specificsはcustom renderesやeffectsを実装することなく特定のプラットフォームでのみ利用できる機能の使用を可能にします。
 
-
-## Related Links
+## 関連リンク
 
 - [Creating Platform-Specifics](~/xamarin-forms/platform/platform-specifics/creating.md)
 - [PlatformSpecifics (sample)](https://developer.xamarin.com/samples/xamarin-forms/userinterface/platformspecifics/)
